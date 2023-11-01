@@ -3,17 +3,14 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 import secrets
 
+# БД и приложение Flask
 secret_key = secrets.token_urlsafe(16)
-
 app = Flask(__name__)
 app.debug = True
 app.config['SECRET_KEY']=secret_key
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
-
-
 db = SQLAlchemy(app)
 app.app_context().push()
-
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(20), unique=False, nullable=False)
@@ -25,6 +22,8 @@ class Profile(db.Model):
         return f"Login : {self.first_name}, Password: {self.password}"
 
 
+
+# Маршрутизация
 isLogged=False
 
 def returnError(errorStr):
