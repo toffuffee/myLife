@@ -66,9 +66,5 @@ def adminka():
     else:
         return returnError('Сначала нужно пройти авторизацию')
 
-
-with app.app_context(): 
-    db.create_all()
-
 if __name__ == '__main__':
     app.run(port='9000')
